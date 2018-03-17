@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Degree;
 use App\Book;
 use App\Lesson;
+use Auth;
 
 class AdminController extends Controller
 {
@@ -194,7 +195,83 @@ class AdminController extends Controller
 
     public function book()
     {
-        $books = DB::table('books')->orderBy('name', 'asc')->simplePaginate(5);
+        $books = Book::with('Degree', 'Lesson')->orderBy('name', 'asc')->simplePaginate(5);
         return view('admin.book.index')->with('books', $books);
+    }
+
+    public function createbook()
+    {
+        $lessons = Lesson::get();
+        $degrees = Degree::get();
+        $data = [
+            'lessons' => $lessons,
+            'degrees' => $degrees,
+        ];
+        return view('admin.book.create', $data);
+    }
+
+    public function storebook(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|min:5|max:255',
+            'class' => 'required|numeric|max:12',
+            'semester' => 'required|numeric|max:2',
+            'publisher' => 'required|min:3|max:255',
+        ]);
+
+        $book = New Book;
+        $book->name = $request->input('name');
+        $book->class = $request->input('class');
+        $book->semester = $request->input('semester');
+        $book->publisher = $request->input('publisher');
+        $book->lesson_id = $request->input('lesson');
+        $book->degree_id = $request->input('degree');
+        $book->user_id = Auth::user()->id;
+        $book->save();
+
+        return redirect()->route('book');
+    }
+
+    public function editbook($id)
+    {
+        $book = Book::find($id);
+        $lessons = Lesson::get();
+        $degrees = Degree::get();
+        $data = [
+            'book' => $book,
+            'lessons' => $lessons,
+            'degrees' => $degrees,
+        ];
+        return view('admin.book.edit', $data);
+    }
+
+    public function updatebook(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|min:5|max:255',
+            'class' => 'required|numeric|max:12',
+            'semester' => 'required|numeric|max:2',
+            'publisher' => 'required|min:3|max:255',
+        ]);
+
+        $book = Book::find($id);
+        $book->name = $request->input('name');
+        $book->class = $request->input('class');
+        $book->semester = $request->input('semester');
+        $book->publisher = $request->input('publisher');
+        $book->lesson_id = $request->input('lesson');
+        $book->degree_id = $request->input('degree');
+        $book->user_id = Auth::user()->id;
+        $book->save();
+
+        return redirect()->route('book');
+    }
+
+    public function destroybook($id)
+    {
+        $book = Book::find($id);
+        $book->delete();
+
+        return redirect()->route('book');
     }
 }

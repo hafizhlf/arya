@@ -38,5 +38,10 @@ Route::delete('/admin/lesson/{lesson}', 'AdminController@destroylesson')->name('
 
 /* Halaman buku LKS *pada akses admin */
 Route::get('/admin/book', 'AdminController@book')->name('book');
+Route::get('/admin/book/create', 'AdminController@createbook')->name('createbook');
+Route::post('/admin/book/store', 'AdminController@storebook')->name('storebook');
+Route::get('/admin/book/edit/{book}', 'AdminController@editbook')->name('editbook');
+Route::post('/admin/book/update/{book}', 'AdminController@updatebook')->name('updatebook');
+Route::delete('/admin/book/{book}', 'AdminController@destroybook')->name('destroybook');
 
 Route::get('/home', 'HomeController@index')->name('home');

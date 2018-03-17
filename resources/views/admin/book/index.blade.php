@@ -3,34 +3,40 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">{{ __(('Buku LKS')) }}</div>
 
                 <div class="card-body text-center">
-                    @if (!empty($degrees[0]->name))
+                    @if (!empty($books[0]->name))
                         <table class="table table-hover">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
+                                    <th scope="col">{{ __('Pelajaran') }}</th>
                                     <th scope="col">{{ __('Nama Buku') }}</th>
                                     <th scope="col">{{ __('Tingkat Pendidikan') }}</th>
                                     <th scope="col">{{ __('Kelas') }}</th>
                                     <th scope="col">{{ __('Semester') }}</th>
                                     <th scope="col">{{ __('Penerbit') }}</th>
-                                    <th scope="col" colspan="2"><a href="{{ route('createdegree') }}" class="form-control btn btn-outline-success btn-sm">Tambah</a></th>
+                                    <th scope="col" colspan="2"><a href="{{ route('createbook') }}" class="form-control btn btn-outline-success btn-sm">Tambah</a></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($books as $book)
                                 <tr>
                                     <th scope="row">1</th>
+                                    <td>{{ $book->lesson->name }}</td>
                                     <td>{{ $book->name }}</td>
+                                    <td>{{ $book->degree->name }}</td>
+                                    <td>{{ $book->class }}</td>
+                                    <td>{{ $book->semester }}</td>
+                                    <td>{{ $book->publisher }}</td>
                                     <td>
-                                        <a href="{{ route('editdegree', $book->id) }}" class="form-control btn btn-outline-primary btn-sm">{{ __('Ubah') }}</a>
+                                        <a href="{{ route('editbook', $book->id) }}" class="form-control btn btn-outline-primary btn-sm">{{ __('Ubah') }}</a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('destroydegree', $book->id) }}" method="POST">
+                                        <form action="{{ route('destroybook', $book->id) }}" method="POST">
                                             @csrf
                                             <input type="hidden" name="_method" value="DELETE">
                                             <input type="submit" class="form-control btn btn-outline-danger btn-sm" value="Hapus">
@@ -43,7 +49,7 @@
                         {{ $books->links() }}
                     @else
                         <p>Data Kosong</p>
-                        <a href="{{ route('createdegree') }}" class="btn btn-outline-success btn-sm">Tambahkan data</a>
+                        <a href="{{ route('createbook') }}" class="btn btn-outline-success btn-sm">Tambahkan data</a>
                     @endif
                 </div>
                 <div class="card-footer text-muted">
