@@ -28,6 +28,14 @@ Route::get('/admin/degree/edit/{degree}', 'AdminController@editdegree')->name('e
 Route::post('/admin/degree/update/{degree}', 'AdminController@updatedegree')->name('updatedegree');
 Route::delete('/admin/degree/{degree}', 'AdminController@destroydegree')->name('destroydegree');
 
+/* Halaman pelajaran *pada akses admin */
+Route::get('/admin/lesson', 'AdminController@lesson')->name('lesson');
+Route::get('/admin/lesson/create', 'AdminController@createlesson')->name('createlesson');
+Route::post('/admin/lesson/store', 'AdminController@storelesson')->name('storelesson');
+Route::get('/admin/lesson/edit/{lesson}', 'AdminController@editlesson')->name('editlesson');
+Route::post('/admin/lesson/update/{lesson}', 'AdminController@updatelesson')->name('updatelesson');
+Route::delete('/admin/lesson/{lesson}', 'AdminController@destroylesson')->name('destroylesson');
+
 /* Halaman buku LKS *pada akses admin */
 Route::get('/admin/book', 'AdminController@book')->name('book');
 

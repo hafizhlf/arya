@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Degree;
 use App\Book;
+use App\Lesson;
 
 class AdminController extends Controller
 {
@@ -141,6 +142,54 @@ class AdminController extends Controller
         $degree = Degree::find($id);
         $degree->delete();
         return redirect()->route('degree');
+    }
+
+    public function lesson()
+    {
+        $lessons = DB::table('lessons')->orderBy('name', 'asc')->simplePaginate(5);
+        return view('admin.lesson.index')->with('lessons', $lessons);
+    }
+
+    public function createlesson()
+    {
+        return view('admin.lesson.create');
+    }
+
+    public function storelesson(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|unique:lessons|min:2|max:255',
+        ]);
+
+        $lesson = New Lesson;
+        $lesson->name = $request->input('name');
+        $lesson->save();
+        return redirect()->route('lesson');
+    }
+
+    public function editlesson($id)
+    {
+        $lesson = Lesson::find($id);
+        return view('admin.lesson.edit')->with('lesson', $lesson);
+    }
+
+    public function updatelesson(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|unique:lessons|min:2|max:255',
+        ]);
+
+        $lesson = Lesson::find($id);
+        $lesson->name = $request->input('name');
+        $lesson->save();
+        return redirect()->route('lesson');
+    }
+
+    public function destroylesson($id)
+    {
+        $lesson = Lesson::find($id);
+        $lesson->delete();
+        return redirect()->route('lesson');
     }
 
     public function book()

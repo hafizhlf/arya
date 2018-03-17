@@ -5,32 +5,28 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __(('Buku LKS')) }}</div>
+                <div class="card-header">Pelajaran</div>
 
                 <div class="card-body text-center">
-                    @if (!empty($degrees[0]->name))
+                    @if (!empty($lessons[0]->name))
                         <table class="table table-hover">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">{{ __('Nama Buku') }}</th>
-                                    <th scope="col">{{ __('Tingkat Pendidikan') }}</th>
-                                    <th scope="col">{{ __('Kelas') }}</th>
-                                    <th scope="col">{{ __('Semester') }}</th>
-                                    <th scope="col">{{ __('Penerbit') }}</th>
-                                    <th scope="col" colspan="2"><a href="{{ route('createdegree') }}" class="form-control btn btn-outline-success btn-sm">Tambah</a></th>
+                                    <th scope="col">Nama Pelajaran</th>
+                                    <th scope="col" colspan="2"><a href="{{ route('createlesson') }}" class="form-control btn btn-outline-success btn-sm">Tambah</a></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($books as $book)
+                                @foreach ($lessons as $lesson)
                                 <tr>
                                     <th scope="row">1</th>
-                                    <td>{{ $book->name }}</td>
+                                    <td>{{ $lesson->name }}</td>
                                     <td>
-                                        <a href="{{ route('editdegree', $book->id) }}" class="form-control btn btn-outline-primary btn-sm">{{ __('Ubah') }}</a>
+                                        <a href="{{ route('editlesson', $lesson->id) }}" class="form-control btn btn-outline-primary btn-sm">{{ __('Ubah') }}</a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('destroydegree', $book->id) }}" method="POST">
+                                        <form action="{{ route('destroylesson', $lesson->id) }}" method="POST">
                                             @csrf
                                             <input type="hidden" name="_method" value="DELETE">
                                             <input type="submit" class="form-control btn btn-outline-danger btn-sm" value="Hapus">
@@ -40,10 +36,10 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $books->links() }}
+                        {{ $lessons->links() }}
                     @else
                         <p>Data Kosong</p>
-                        <a href="{{ route('createdegree') }}" class="btn btn-outline-success btn-sm">Tambahkan data</a>
+                        <a href="{{ route('createlesson') }}" class="btn btn-outline-success btn-sm">Tambahkan data</a>
                     @endif
                 </div>
                 <div class="card-footer text-muted">
