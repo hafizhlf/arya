@@ -117,6 +117,24 @@ class AdminController extends Controller
         return redirect()->route('degree');
     }
 
+    public function editdegree($id)
+    {
+        $degree = Degree::find($id);
+        return view('admin.degree.edit')->with('degree', $degree);
+    }
+
+    public function updatedegree(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|unique:degrees|min:2|max:255',
+        ]);
+
+        $degree = Degree::find($id);
+        $degree->name = $request->input('name');
+        $degree->save();
+        return redirect()->route('degree');
+    }
+
     public function destroydegree($id)
     {
         $degree = Degree::find($id);
