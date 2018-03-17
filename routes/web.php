@@ -19,11 +19,16 @@ Auth::routes();
 
 /* Halaman Admin */
 Route::get('/admin', 'AdminController@index')->name('admin');
+
+/* Halaman Tingkat Pendidikan *pada akses admin */
 Route::get('/admin/degree', 'AdminController@degree')->name('degree');
 Route::get('/admin/degree/create', 'AdminController@createdegree')->name('createdegree');
 Route::post('/admin/degree/store', 'AdminController@storedegree')->name('storedegree');
 Route::get('/admin/degree/edit/{degree}', 'AdminController@editdegree')->name('editdegree');
 Route::post('/admin/degree/update/{degree}', 'AdminController@updatedegree')->name('updatedegree');
 Route::delete('/admin/degree/{degree}', 'AdminController@destroydegree')->name('destroydegree');
+
+/* Halaman buku LKS *pada akses admin */
+Route::get('/admin/book', 'AdminController@book')->name('book');
 
 Route::get('/home', 'HomeController@index')->name('home');

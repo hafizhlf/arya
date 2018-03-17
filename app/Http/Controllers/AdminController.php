@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Degree;
+use App\Book;
 
 class AdminController extends Controller
 {
@@ -140,5 +141,11 @@ class AdminController extends Controller
         $degree = Degree::find($id);
         $degree->delete();
         return redirect()->route('degree');
+    }
+
+    public function book()
+    {
+        $books = DB::table('books')->orderBy('name', 'asc')->simplePaginate(5);
+        return view('admin.book.index')->with('books', $books);
     }
 }
