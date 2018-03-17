@@ -17,6 +17,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
+/* Halaman Admin */
 Route::get('/admin', 'AdminController@index')->name('admin');
+Route::get('/admin/degree', 'AdminController@degree')->name('degree');
+Route::get('/admin/degree/create', 'AdminController@createdegree')->name('createdegree');
+Route::post('/admin/degree/store', 'AdminController@storedegree')->name('storedegree');
+Route::delete('/admin/degree/{degree}', 'AdminController@destroydegree')->name('destroydegree');
 
 Route::get('/home', 'HomeController@index')->name('home');

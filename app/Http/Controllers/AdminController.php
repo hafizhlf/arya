@@ -3,9 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Degree;
 
 class AdminController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -80,5 +92,35 @@ class AdminController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function degree()
+    {
+        $degrees = DB::table('degrees')->orderBy('name', 'asc')->simplePaginate(5);
+        return view('admin.degree.index')->with('degrees', $degrees);
+    }
+
+    public function createdegree()
+    {
+        return view('admin.degree.create');
+    }
+
+    public function storedegree(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|unique:degrees|min:2|max:255',
+        ]);
+
+        $degree = New Degree;
+        $degree->name = $request->input('name');
+        $degree->save();
+        return redirect()->route('degree');
+    }
+
+    public function destroydegree($id)
+    {
+        $degree = Degree::find($id);
+        $degree->delete();
+        return redirect()->route('degree');
     }
 }
