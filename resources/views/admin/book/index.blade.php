@@ -27,7 +27,7 @@
                                 <tr>
                                     <th scope="row">1</th>
                                     <td>{{ $book->lesson->name }}</td>
-                                    <td>{{ $book->name }}</td>
+                                    <td><a href="{{ route('section', $book->id) }}">{{ $book->name }}</a></td>
                                     <td>{{ $book->degree->name }}</td>
                                     <td>{{ $book->class }}</td>
                                     <td>{{ $book->semester }}</td>

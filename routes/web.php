@@ -44,4 +44,11 @@ Route::get('/admin/book/edit/{book}', 'AdminController@editbook')->name('editboo
 Route::post('/admin/book/update/{book}', 'AdminController@updatebook')->name('updatebook');
 Route::delete('/admin/book/{book}', 'AdminController@destroybook')->name('destroybook');
 
+/* Halaman untuk pemisah soal pada buku LKS *akses admin */
+Route::get('/admin/section/{book}', 'AdminController@section')->name('section');
+
+/* Halaman pertanyaan *pada akses admin */
+Route::get('/admin/question/{book}', 'AdminController@question')->name('question');
+Route::get('/admin/question/create', 'AdminController@createquestion')->name('createquestion');
+
 Route::get('/home', 'HomeController@index')->name('home');

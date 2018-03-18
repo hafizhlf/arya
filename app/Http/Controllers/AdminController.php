@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use App\Degree;
 use App\Book;
 use App\Lesson;
+use App\Question;
+use App\Section;
 use Auth;
 
 class AdminController extends Controller
@@ -273,5 +275,33 @@ class AdminController extends Controller
         $book->delete();
 
         return redirect()->route('book');
+    }
+
+    public function section($id)
+    {
+        $sections = Book::find($id)->section()->paginate(5);
+        $book = Book::find($id);
+        $data = [
+            'sections' => $sections,
+            'book' => $book,
+        ];
+
+        return view('admin.section.index', $data);
+    }
+
+    public function question($id)
+    {
+        $questions = Question::get();
+        $book = Book::find($id);
+        $data = [
+            'book' => $book,
+            'questions' => $questions,
+        ];
+        return view('admin.question.index', $data);
+    }
+
+    public function createquestion()
+    {
+        return view('admin.question.create');
     }
 }

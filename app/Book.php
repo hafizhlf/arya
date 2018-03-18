@@ -15,4 +15,9 @@ class Book extends Model
     {
         return $this->belongsTo('App\Lesson');
     }
+
+    public function section()
+    {
+        return $this->hasMany('App\Section');
+    }
 }
