@@ -292,16 +292,30 @@ class AdminController extends Controller
     public function question($id)
     {
         $questions = Question::get();
-        $book = Book::find($id);
+        $book = Section::find($id);
         $data = [
             'book' => $book,
             'questions' => $questions,
         ];
+
         return view('admin.question.index', $data);
     }
 
-    public function createquestion()
+    public function amountquestion($id)
     {
-        return view('admin.question.create');
+        $section = Section::find($id);
+
+        return view('admin.question.amount')->with('section', $section);
+    }
+
+    public function createquestion(Request $request, $id)
+    {
+        $section = Section::find($id);
+        echo $request->input('count');
+        if(!empty($request->input('essay'))){
+            echo "abc";
+        }
+
+       //return view('admin.question.create')->with('section', $section);
     }
 }

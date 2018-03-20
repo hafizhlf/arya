@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Bank Soal Buku LKS "{{ $book->name }}" </div>
+                <div class="card-header">Bank Soal Buku LKS</div>
 
                 <div class="card-body text-center">
                     @if (!empty($questions[0]->name))
@@ -14,7 +14,7 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Nama Pelajaran</th>
-                                    <th scope="col" colspan="2"><a href="{{ route('createlesson') }}" class="form-control btn btn-outline-success btn-sm">Tambah</a></th>
+                                    <th scope="col" colspan="2"><a href="{{ route('createlesson', $book->id) }}" class="form-control btn btn-outline-success btn-sm">Tambah</a></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,11 +39,11 @@
                         {{ $lessons->links() }}
                     @else
                         <p>Data Kosong</p>
-                        <a href="{{ route('createquestion') }}" class="btn btn-outline-success btn-sm">Tambahkan data</a>
+                        <a href="{{ route('amountquestion', $book->id) }}" class="btn btn-outline-success btn-sm">Tambahkan data</a>
                     @endif
                 </div>
                 <div class="card-footer text-muted">
-                    <a href="{{ route('admin') }}" style="text-decoration: none;">Kembali ke halaman Admin</a>
+                    <a href="{{ route('book') }}" style="text-decoration: none;">Kembali ke halaman sebelumnya</a>
                 </div>
             </div>
         </div>

@@ -28,11 +28,6 @@
                     <a href="{{ route('book') }}" class="btn btn-outline-primary">Tampilkan</a>
                 </div>
                 <div class="card-body text-center">
-                    <h5 class="card-title">Bank Soal pada LKS</h5>                    
-                    <p class="card-text text-muted">Lihat, tambah, ubah dan hapus soal pada sistem.</p>
-                    <a href="{{ route('question') }}" class="btn btn-outline-primary">Tampilkan</a>
-                </div>
-                <div class="card-body text-center">
                     <a href="" class="btn btn-outline-primary">Tingkatan Pelajaran</a>
                 </div>
                 </div>

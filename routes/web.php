@@ -48,7 +48,8 @@ Route::delete('/admin/book/{book}', 'AdminController@destroybook')->name('destro
 Route::get('/admin/section/{book}', 'AdminController@section')->name('section');
 
 /* Halaman pertanyaan *pada akses admin */
-Route::get('/admin/question/{book}', 'AdminController@question')->name('question');
-Route::get('/admin/question/create', 'AdminController@createquestion')->name('createquestion');
+Route::get('/admin/question/{section}', 'AdminController@question')->name('question');
+Route::get('/admin/question/amount/{section}', 'AdminController@amountquestion')->name('amountquestion');
+Route::post('/admin/question/create/{section}', 'AdminController@createquestion')->name('createquestion');
 
 Route::get('/home', 'HomeController@index')->name('home');

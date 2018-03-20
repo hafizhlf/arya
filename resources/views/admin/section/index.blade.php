@@ -14,7 +14,8 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Judul</th>
-                                    <th scope="col" colspan="3"><a href="{{ route('createlesson') }}" class="form-control btn btn-outline-success btn-sm">Tambah</a></th>
+                                    <th scope="col"></th>
+                                    <th scope="col" colspan="2"><a href="{{ route('createlesson') }}" class="form-control btn btn-outline-success btn-sm">Tambah</a></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -23,7 +24,7 @@
                                     <th scope="row">1</th>
                                     <td>{{ $section->name }}</td>
                                     <td>
-                                        <a href="{{ route('editlesson', $section->id) }}" class="form-control btn btn-outline-secondary btn-sm">{{ __('Masukkan soal') }}</a>
+                                        <a href="{{ route('question', $section->id) }}" class="form-control btn btn-outline-secondary btn-sm">{{ __('Lihat soal') }}</a>
                                     </td>
                                     <td>
                                         <a href="{{ route('editlesson', $section->id) }}" class="form-control btn btn-outline-primary btn-sm">{{ __('Ubah') }}</a>
@@ -46,7 +47,7 @@
                     @endif
                 </div>
                 <div class="card-footer text-muted">
-                    <a href="{{ route('admin') }}" style="text-decoration: none;">Kembali ke halaman Admin</a>
+                    <a href="{{ route('book') }}" style="text-decoration: none;">Kembali ke halaman sebelumnya</a>
                 </div>
             </div>
         </div>
